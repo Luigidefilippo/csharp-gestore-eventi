@@ -39,5 +39,19 @@ namespace csharp_gestore_eventi
             return result;
 
         }
+        public int NumeroEventi()
+        {
+            return eventi.Count;
+        }
+        public void SvuotaEventi()
+        {
+            eventi.Clear();
+        }
+        public override string ToString()
+        {
+            string result = $"Nome programma evento : {Titolo}\n";
+            result += StampaEventi(eventi);
+            return result;
+        }
     }
 }
