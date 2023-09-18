@@ -71,13 +71,18 @@ namespace csharp_gestore_eventi
         }
         public void DisdiciPosti(int numeroPosti)
         {
-            if (data < DateTime.Now)
-                throw new ArgumentOutOfRangeException("L'evento si è già tenuto");
-            if (numeroPosti <= 0)
-                throw new ArgumentOutOfRangeException("il numero di posti da disdire deve essere di almeno 1");
-            if ( postiPrenotati < numeroPosti )
-                throw new ArgumentOutOfRangeException("Non ci sono abbastanza posti che puoi disdire ");
-            postiPrenotati -= numeroPosti;
+            if ( numeroPosti < 0 )
+            {
+                throw new ArgumentException("Il numero di posti disdetti deve essere maggiore o uguale a 1 ");
+            }
+            else if ( numeroPosti > this.capienzaMassima )
+            {
+                throw new ArgumentOutOfRangeException("Non è possibile disdire più posti di quelli prenotati ");
+            }
+            else
+            {
+                this.postiPrenotati -= numeroPosti;
+            }
         }
 
         public override string ToString()
