@@ -43,6 +43,7 @@ namespace csharp_gestore_eventi
         public int PostiPrenotati
         {
             get { return postiPrenotati;}
+            
         }
         public Evento(string titolo , DateTime data , int capienzaMassima)
         {
@@ -55,12 +56,18 @@ namespace csharp_gestore_eventi
         }
         public void PrenotaPosti( int numeroPosti)
         {
-            if (data < DateTime.Now)
-                throw new ArgumentOutOfRangeException("L'evento si è già tenuto");
-            if (numeroPosti <= 0)
-                throw new ArgumentOutOfRangeException("Devi prenotare alemno 1 posto");
-            if (postiPrenotati + numeroPosti > capienzaMassima)
-                throw new ArgumentOutOfRangeException("Non ci sono abbastanza posti disponibili"); 
+            if(postiPrenotati > this.capienzaMassima )
+            {
+                throw new ArgumentOutOfRangeException("i posti sono già tutti prenotati ");
+            }
+            else if (this.data < DateTime.Now)
+            {
+                throw new ArgumentOutOfRangeException("l'evento è terminato ");
+            }
+            else
+            {
+                postiPrenotati = numeroPosti;
+            }
         }
         public void DisdiciPosti(int numeroPosti)
         {
