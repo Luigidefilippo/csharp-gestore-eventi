@@ -53,6 +53,30 @@ namespace csharp_gestore_eventi
             this.capienzaMassima = capienzaMassima;
             postiPrenotati = 0; 
         }
+        public void PrenotaPosti( int numeroPosti)
+        {
+            if (data < DateTime.Now)
+                throw new ArgumentOutOfRangeException("L'evento si è già tenuto");
+            if (numeroPosti <= 0)
+                throw new ArgumentOutOfRangeException("Devi prenotare alemno 1 posto");
+            if (postiPrenotati + numeroPosti > capienzaMassima)
+                throw new ArgumentOutOfRangeException("Non ci sono abbastanza posti disponibili"); 
+        }
+        public void DisdiciPosti(int numeroPosti)
+        {
+            if (data < DateTime.Now)
+                throw new ArgumentOutOfRangeException("L'evento si è già tenuto");
+            if (numeroPosti <= 0)
+                throw new ArgumentOutOfRangeException("il numero di posti da disdire deve essere di almeno 1");
+            if ( postiPrenotati < numeroPosti )
+                throw new ArgumentOutOfRangeException("Non ci sono abbastanza posti che puoi disdire ");
+            postiPrenotati -= numeroPosti;
+        }
+
+        public override string ToString()
+        {
+            return $"{data.ToString("dd/MM/yyyy")} - {Titolo}";
+        }
     }
 
 }
