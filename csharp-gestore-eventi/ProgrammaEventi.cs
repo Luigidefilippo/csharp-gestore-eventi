@@ -31,8 +31,13 @@ namespace csharp_gestore_eventi
             {
                 return "Nessun evento trovato";
             }
+            string result = "";
+            foreach (Evento e in eventi)
+            {
+                result += $"{e.Data.ToString("dd/MM/yyyy")} - {e.Titolo}\n";
+            }
+            return result;
 
-            
         }
     }
 }
